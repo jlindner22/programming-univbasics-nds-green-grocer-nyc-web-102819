@@ -57,20 +57,7 @@ def apply_coupons(cart, coupons)
 end
 
 def apply_clearance(cart)
-new_array = []
-  i = 0
-  sale = cart[i][:clearance]
-  cost = cart[i][:cost]
-  while i < collection.length 
-  if sale == true 
-    cost * 0.8
-  else 
-    cost
-    i += 1
-end
-    return collection[i] 
-end
-  # REMEMBER: This method **should** update cart
+cart.map{|sale| sale[:price] * 0.8 
 end
 
 def checkout(cart, coupons)
