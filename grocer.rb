@@ -68,12 +68,14 @@ end
 end
 
 def checkout(cart, coupons)
-
   consolidated_cart = consolidate_cart(cart)
-  discounted_cart = apply_coupons(consolidated, coupons)
-  clearance_cart = apply_clearance(discount)
-  
-  
-  # BEFORE it begins the work of calculating the total (or else you might have
-  # some irritated customers
+  discounted_cart = apply_coupons(consolidated_cart, coupons)
+  clearance_cart = apply_clearance(discounted_cart)
+
+  gross_total = clearance_cart.reduce(0){|total, item| total + item[:price] * item[:count]}
+  if gross_total > 100
+    gross_total * 0.9
+  else
+    gross_total
+  end
 end
