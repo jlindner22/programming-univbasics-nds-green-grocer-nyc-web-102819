@@ -48,9 +48,7 @@ def apply_coupons(cart, coupons)
         :clearance => item[:clearance], :count => coupon[:num]}
       new_array.push(discounted_item)
       no_sale_item = {:item => item[:item],:price => item[:price], :clearance => item[:clearance], :count => item[:count] - coupon[:num]}
-      if no_sale_item[:count] != 0
         new_array.push(no_sale_item)
-      end
     else
       new_array.push(item)
     end
