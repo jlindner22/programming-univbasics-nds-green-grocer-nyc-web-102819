@@ -44,16 +44,19 @@ def apply_coupons(cart, coupons)
     coupon = get_coupon(item, coupons)
     if coupon
       discounted_price = coupon[:cost] / coupon[:num]
-      discounted_item = {:item => item[:item], :price => discounted_price,
+      discounted_item = {:item => item[:item] + " W/COUPON", :price => discounted_price,
         :clearance => item[:clearance], :count => coupon[:num]}
-        new_array.push(discounted_item)
+      new_array.push(discounted_item)
+      no_sale_item = {:item => item[:item],:price => item[:price], :clearance => item[:clearance], :count => item[:count] - coupon[:num]}
+      if no_sale_item[:count] != 0
+        new_array.push(no_sale_item)
+      end
     else
       new_array.push(item)
     end
   end
   new_array
 end
-#change string name and add W/COUPON
 
 def apply_clearance(cart)
 new_array = []
