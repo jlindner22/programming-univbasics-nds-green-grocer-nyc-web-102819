@@ -57,7 +57,14 @@ def apply_coupons(cart, coupons)
 end
 
 def apply_clearance(cart)
-cart.map{|sale| sale[:price] * 0.8 
+cart.map{|item|
+new_hash = {:item => item[:item],:price => (item[:price] * 0.8).round(2), :clearance => item[:clearance], :count => item[:count]}
+if item[:clearance]
+  new_hash
+else
+  item
+end
+}
 end
 
 def checkout(cart, coupons)
